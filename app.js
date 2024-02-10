@@ -1,4 +1,3 @@
-const body = document.querySelector("body");
 const h1 = document.createElement("h1");
 const container = document.createElement("div");
 const header = document.createElement("div");
@@ -12,8 +11,8 @@ const form = document.createElement("form");
 const formCard = document.createElement("div");
 const input = document.createElement("input");
 const button = document.createElement("button");
-const listTask = document.createElement("div");
-listTask.className = "list-task";
+const todoList = document.createElement("div");
+todoList.className = "list-task";
 container.className = "container";
 iconPencil.classList.add("fa-regular", "fa-pen-to-square");
 hr3.className = "form-underline";
@@ -27,8 +26,8 @@ span.append(iconPencil);
 header.append(h1, headerLine);
 formCard.append(input, button);
 form.append(formCard);
-container.append(header, form, hr3, listTask);
-body.append(container);
+container.append(header, form, hr3, todoList);
+document.body.append(container);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -42,18 +41,18 @@ const dataBase = [];
 
 const addTask = (task) => { // yuxarida gonderdiyimiz input valeusunu burada goturub dataBase-e elave edirik
   dataBase.push(task);
-  createTaskList(dataBase); // array formasinda olan dataBase-i novbeti functiona gonderirik ve onu loopa salib her elave edilen data qeder li-ler  (task-list) yaradiriq
+  createTodo(dataBase); // array formasinda olan dataBase-i novbeti functiona gonderirik ve onu loopa salib her elave edilen data qeder li-ler  (task-list) yaradiriq
 };
 
-const createTaskList = (data) => {
-  listTask.innerHTML = "";
+const createTodo = (data) => {
+  todoList.innerHTML = "";
   const ul = document.createElement("ul");
   data.map((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     ul.append(li);
   });
-  listTask.append(ul);
+  todoList.append(ul);
 };
 
 // burada kodu ayri ayri functionlara ayirdim bacardigim qeder daha seliqeli alinsin))) bilmirem dogrumu bolmusem yoxsa artiq kodlar varmi?
