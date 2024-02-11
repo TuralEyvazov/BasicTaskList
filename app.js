@@ -1,32 +1,31 @@
-const h1 = document.createElement("h1");
-const container = document.createElement("div");
-const header = document.createElement("div");
-const headerLine = document.createElement("div");
-const span = document.createElement("span");
-const iconPencil = document.createElement("i");
-const hr1 = document.createElement("hr");
-const hr2 = document.createElement("hr");
-const hr3 = document.createElement("hr");
-const form = document.createElement("form");
-const formCard = document.createElement("div");
-const input = document.createElement("input");
-const button = document.createElement("button");
-const todoList = document.createElement("div");
-todoList.className = "list-task";
-container.className = "container";
+const createElements = (tagName, className, textContent) => {
+  const tag = document.createElement(tagName);
+  className && tag.classList.add(className);
+  textContent && (tag.textContent = textContent);
+  return tag;
+};
+
+const h1 = createElements("h1", "headerText", "-TO-DO NOW-");
+const container = createElements("div", "container");
+const header = createElements("div", "header");
+const leftLine = createElements("hr");
+const rigthLine = createElements("hr");
+const underLine = createElements("hr", "form-underline");
+const headerLine = createElements("div", "headerLine");
+const span = createElements("span");
+const iconPencil = createElements("i");
+const form = createElements("form");
+const formCard = createElements("div", "form-card");
+const input = createElements("input");
+const button = createElements("button", "btn", "Add task");
+const todoList = createElements("div", "list-task");
 iconPencil.classList.add("fa-regular", "fa-pen-to-square");
-hr3.className = "form-underline";
-header.classList.add("header");
-headerLine.classList = "headerLine";
-formCard.classList.add("form-card");
-h1.textContent = "-- TO-DO NOW --";
-button.textContent = "Add task";
-headerLine.append(hr1, span, hr2);
+headerLine.append(leftLine, span, rigthLine);
 span.append(iconPencil);
 header.append(h1, headerLine);
 formCard.append(input, button);
 form.append(formCard);
-container.append(header, form, hr3, todoList);
+container.append(header, form, underLine, todoList);
 document.body.append(container);
 
 form.addEventListener("submit", (e) => {
@@ -39,7 +38,8 @@ form.addEventListener("submit", (e) => {
 
 const dataBase = [];
 
-const addTask = (task) => { // yuxarida gonderdiyimiz input valeusunu burada goturub dataBase-e elave edirik
+const addTask = (task) => {
+  // yuxarida gonderdiyimiz input valeusunu burada goturub dataBase-e elave edirik
   dataBase.push(task);
   createTodo(dataBase); // array formasinda olan dataBase-i novbeti functiona gonderirik ve onu loopa salib her elave edilen data qeder li-ler  (task-list) yaradiriq
 };
@@ -47,7 +47,7 @@ const addTask = (task) => { // yuxarida gonderdiyimiz input valeusunu burada got
 const createTodo = (data) => {
   todoList.innerHTML = "";
   const ul = document.createElement("ul");
-  data.map((item) => {
+  data.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     ul.append(li);
